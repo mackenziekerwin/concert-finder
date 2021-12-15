@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import SearchResult from '../SearchResult';
 
 const SearchResults = () => {
-  const events = useSelector((state) => state.events);
+  const { allEvents } = useSelector((state) => state.events);
   const dispatch = useDispatch();
   const { query } = useParams();
 
@@ -13,8 +13,8 @@ const SearchResults = () => {
 
   return (
     <div>
-      {events.length ? (
-        events.map((event) => <SearchResult key={event.id} event={event} />)
+      {allEvents.length ? (
+        allEvents.map((event) => <SearchResult key={event._id} event={event} />)
       ) : (
         <h6 className="mt-3">
           No results. Try searching for an artist or venue.

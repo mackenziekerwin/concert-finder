@@ -1,16 +1,26 @@
+import './App.css';
+
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Details from './pages/Details';
+import Privacy from './pages/Privacy';
 
 import events from './reducers/events';
+import profile from './reducers/profile';
+import activity from './reducers/activity';
+
 import NavBar from './components/NavBar';
 import FeedWrapper from './components/FeedWrapper';
 import SearchResults from './components/SearchResults';
+import ProfileOther from './pages/ProfileOther';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
-const reducer = combineReducers({ events });
+const reducer = combineReducers({ events, profile, activity });
 const store = createStore(reducer);
 
 const App = () => {
@@ -33,6 +43,11 @@ const App = () => {
               element={<FeedWrapper feedComponent={<SearchResults />} />}
             />
             <Route path="/details/:id" element={<Details />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:id" element={<ProfileOther />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </div>
       </Provider>

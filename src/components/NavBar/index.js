@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
+  const { profile } = useSelector((state) => state);
+  const anon = !Object.entries(profile).length;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -22,15 +26,30 @@ const NavBar = () => {
           id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Log In
+              <Link className="nav-link" to="/privacy">
+                Privacy
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Sign Up
-              </Link>
-            </li>
+            {anon ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Log In
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/profile">
+                  {profile.firstName}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
